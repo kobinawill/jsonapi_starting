@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'displayDialog.dart' as display;
 
 void main() async {
   List _data = await getUi();
@@ -27,6 +28,7 @@ void main() async {
                       child: new Text("${_data[indexValue]['id']}"),
                       backgroundColor: Colors.brown.shade900,
                     ),
+                    onTap: () => display.displayAlert(context, "${_data[indexValue]['body']}"),
                   )
                 ],
               );
@@ -40,3 +42,4 @@ Future<List> getUi() async {
     http.Response theResponse = await http.get("https://jsonplaceholder.typicode.com/posts");
     return json.decode(theResponse.body);
 }
+
